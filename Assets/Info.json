@@ -1,0 +1,8 @@
+﻿{
+  "Id": "RainingKeys",
+  "DisplayName": "RainingKeys",
+  "Version": "0.0.2",
+  "EntryMethod": "RainingKeys.Bootstrap.Entry.Load",
+  "AssemblyName": "KeyViewer_Bootstrap.dll",
+  "Requirements": ["AdofaiTweaks"]
+}

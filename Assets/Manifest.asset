@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4137565719803563901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7e13dda513544419a89926bd12ad8a, type: 3}
+  m_Name: AssemblyDefinitions
+  m_EditorClassIdentifier: 
+  StagingPaths:
+  - <StagingRoot>
+  definitions:
+  - {fileID: 5897886265953266890, guid: de001d85a7f44b67a4f7b1e2a0e69e45, type: 3}
+  - {fileID: 5897886265953266890, guid: 4ae96d399e3596b439b1ec5ce34ea0cb, type: 3}
+--- !u!114 &-3884030755613783671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b243ff405b33b94dbf5b6775dd9aa33, type: 3}
+  m_Name: Files
+  m_EditorClassIdentifier: 
+  StagingPaths:
+  - <StagingRoot>
+  files:
+  - {fileID: 4900000, guid: 5be36a747ce7468bbb6efd9d253ef4be, type: 3}
+  - {fileID: -1121539586, guid: cc6da9201f32e814ca6b02e8aa9e3c5b, type: 3}
+--- !u!114 &-90173350892007476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22bb7fd1d3b56a48bc52f8e407901d6, type: 3}
+  m_Name: ManifestIdentity
+  m_EditorClassIdentifier: 
+  StagingPaths: []
+  Author: pikokr
+  Name: KeyViewer
+  Description: 
+  Version: 0.0.1
+  Dependencies: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e563561e08b6a3642a487177f5cfbb37, type: 3}
+  m_Name: Manifest
+  m_EditorClassIdentifier: 
+  Data:
+  - {fileID: -90173350892007476}
+  - {fileID: -4137565719803563901}
+  - {fileID: -3884030755613783671}
+  - {fileID: 2994628271583118293}
+  identity: {fileID: -90173350892007476}
+  QuickAccess: 1
+--- !u!114 &2994628271583118293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17d1008b78cb6e846889b7778282fbef, type: 3}
+  m_Name: AssetBundleDefinitions
+  m_EditorClassIdentifier: 
+  StagingPaths:
+  - <StagingRoot>
+  assetBundles:
+  - assetBundleName: assets.bundle
+    assets:
+    - {fileID: 3586643959215362085, guid: a09492a2cb1bcd9409532b1e050df195, type: 3}
+    - {fileID: 3586643959215362085, guid: bb664016a9bd3ac438cead537f1f6289, type: 3}
+    - {fileID: 3586643959215362085, guid: fb76ae0e212459b4788181b4512c704f, type: 3}
+    - {fileID: 3586643959215362085, guid: 54904591e12274d47a42488c57a0acb0, type: 3}

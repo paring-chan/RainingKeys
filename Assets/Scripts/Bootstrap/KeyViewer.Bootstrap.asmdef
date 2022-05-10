@@ -1,0 +1,17 @@
+{
+    "name": "KeyViewer_Bootstrap",
+    "rootNamespace": "RainingKeys",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "UnityModManager.dll",
+        "0Harmony.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

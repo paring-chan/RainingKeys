@@ -1,0 +1,21 @@
+{
+    "name": "KeyViewer",
+    "rootNamespace": "RainingKeys",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "0Harmony.dll",
+        "Assembly-CSharp.dll",
+        "UnityModManager.dll",
+        "RDTools.dll",
+        "Newtonsoft.Json.dll",
+        "AdofaiTweaks.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
