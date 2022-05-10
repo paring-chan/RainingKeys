@@ -310,6 +310,46 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3019681066321903783, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
+      propertyPath: m_Size.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 3019681066321903783, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
+      propertyPath: m_Size.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4064466875609919105, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4064466875609919105, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
+      propertyPath: m_Size.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4064466875609919105, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
+      propertyPath: m_Offset.x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4064466875609919105, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
+      propertyPath: m_Offset.y
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5467578749707604150, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
+      propertyPath: m_Size.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 5467578749707604150, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
+      propertyPath: m_Size.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5467578749707604150, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
+      propertyPath: m_Offset.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5467578749707604150, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
+      propertyPath: m_Offset.y
+      value: -50
+      objectReference: {fileID: 0}
     - target: {fileID: 8613153070060098657, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
       propertyPath: m_FontData.m_Alignment
       value: 3

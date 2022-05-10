@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace RainingKeys.Components {
@@ -11,6 +12,8 @@ namespace RainingKeys.Components {
         public RectTransform rt;
 
         public ViewerPosition direction;
+
+        public BoxCollider2D collider2d;
 
         private bool _ended;
 
@@ -35,6 +38,11 @@ namespace RainingKeys.Components {
             return Vector2.zero;
         }
 
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            Destroy(gameObject);
+        }
+
         private void Update()
         {
             var toMove = Time.unscaledDeltaTime * 400f;
@@ -42,8 +50,10 @@ namespace RainingKeys.Components {
             var delta = GetSizeDelta(toMove);
             if (Input.GetKey(key) && !_ended)
             {
-                sizeDelta += delta;
+                sizeDelta += new Vector2(Mathf.Abs(delta.x), Mathf.Abs(delta.y));
+                collider2d.size = sizeDelta;
                 rt.sizeDelta = sizeDelta;
+                collider2d.offset -= delta / 2;
             }
             else
             {
@@ -51,21 +61,6 @@ namespace RainingKeys.Components {
             }
 
             rt.anchoredPosition += delta;
-
-            if (direction == ViewerPosition.Top || direction == ViewerPosition.Bottom)
-            {
-                if (rt.anchoredPosition.y - sizeDelta.y > transform.parent.GetComponent<RectTransform>().rect.height)
-                {
-                    Destroy(gameObject);
-                }
-            }
-            else
-            {
-                if (rt.anchoredPosition.x - sizeDelta.x > transform.parent.GetComponent<RectTransform>().rect.width)
-                {
-                    Destroy(gameObject);
-                }
-            }
         }
     }
 }

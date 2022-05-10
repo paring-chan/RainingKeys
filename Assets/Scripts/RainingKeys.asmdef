@@ -1,5 +1,5 @@
 {
-    "name": "KeyViewer_Bootstrap",
+    "name": "RainingKeys",
     "rootNamespace": "RainingKeys",
     "references": [],
     "includePlatforms": [],
@@ -7,8 +7,12 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
+        "0Harmony.dll",
+        "Assembly-CSharp.dll",
         "UnityModManager.dll",
-        "0Harmony.dll"
+        "RDTools.dll",
+        "Newtonsoft.Json.dll",
+        "AdofaiTweaks.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

@@ -45,13 +45,10 @@ namespace RainingKeys.Components {
             c.activeCountTextColor = activeCountTextColor;
             c.rainColor = rainColor;
             c.elem = key;
+            c.position = viewerPosition;
             c.gameObject.SetActive(true);
             Keys.Add(c);
             c.position = viewerPosition;
-        }
-        private void OnApplicationQuit()
-        {
-            Startup.SaveConfig();
         }
     }
 }

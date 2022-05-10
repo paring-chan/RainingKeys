@@ -9,7 +9,7 @@ namespace RainingKeys.Bootstrap {
         private static void Load(UnityModManager.ModEntry entry)
         {
             LoadAssembly(Path.Combine(entry.Path, "NewtonSoft.Json.dll"));
-            var asm = LoadAssembly(Path.Combine(entry.Path, "KeyViewer.dll"));
+            var asm = LoadAssembly(Path.Combine(entry.Path, "RainingKeys.dll"));
             asm.GetType("RainingKeys.Startup")?.GetMethod("Load", AccessTools.all)?.Invoke(null, new object[] {entry});
         }
 
