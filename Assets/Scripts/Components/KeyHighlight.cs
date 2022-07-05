@@ -6,6 +6,7 @@ namespace RainingKeys.Components {
     public class KeyHighlight : MonoBehaviour {
         public KeyCode key;
         public Color color;
+        public Key keyComponent;
 
         public Image image;
 
@@ -13,9 +14,16 @@ namespace RainingKeys.Components {
 
         public ViewerPosition direction;
 
-        public BoxCollider2D collider2d;
-
         private bool _ended;
+
+        private Vector2 _initialPosition;
+        private Vector2 _initialSize;
+        
+        private void Awake()
+        {
+            _initialPosition = rt.anchoredPosition;
+            _initialSize = rt.sizeDelta;
+        }
 
         private void Start()
         {
@@ -38,22 +46,42 @@ namespace RainingKeys.Components {
             return Vector2.zero;
         }
 
-        private void OnTriggerExit2D(Collider2D other)
+        private bool ShouldDestroy()
         {
-            Destroy(gameObject);
+            switch (direction)
+            {
+                case ViewerPosition.Top:
+                    return -rt.anchoredPosition.y - rt.sizeDelta.y > 400;
+                case ViewerPosition.Bottom:
+                    return rt.anchoredPosition.y - rt.sizeDelta.y > 400;
+                case ViewerPosition.Left:
+                    return rt.anchoredPosition.x - rt.sizeDelta.x > 400;
+                case ViewerPosition.Right:
+                    return -rt.anchoredPosition.x - rt.sizeDelta.x > 400;
+            }
+            return false;
         }
 
         private void Update()
         {
+            if (ShouldDestroy())
+            {
+                rt.sizeDelta = _initialSize;
+                rt.anchoredPosition = _initialPosition;
+                _ended = false;
+                gameObject.SetActive(false);
+
+                keyComponent.HighlightPool.Enqueue(this);
+                return;
+            }
+            
             var toMove = Time.unscaledDeltaTime * 400f;
             var sizeDelta = rt.sizeDelta;
             var delta = GetSizeDelta(toMove);
             if (Input.GetKey(key) && !_ended)
             {
                 sizeDelta += new Vector2(Mathf.Abs(delta.x), Mathf.Abs(delta.y));
-                collider2d.size = sizeDelta;
                 rt.sizeDelta = sizeDelta;
-                collider2d.offset -= delta / 2;
             }
             else
             {

@@ -16,6 +16,9 @@ namespace RainingKeys.Components
         public Color activeLineColor;
         public Color rainColor;
 
+        [NonSerialized]
+        public readonly Queue<KeyHighlight> HighlightPool = new();
+
         public KeyElement elem;
 
         public KeyHighlight highlightTemplate;
@@ -101,6 +104,13 @@ namespace RainingKeys.Components
             countText.font = AssetDatabase.LoadAssetAtPath<Font>("Assets/Fonts/NanumSquareRoundB.ttf");
             labelText.font = AssetDatabase.LoadAssetAtPath<Font>("Assets/Fonts/NanumSquareRoundB.ttf");
 #endif
+
+            for (int i = 0; i < 30; i++)
+            {
+                var o = Instantiate(highlightTemplate, highlightTemplate.transform.parent);
+                o.gameObject.SetActive(false);
+                HighlightPool.Enqueue(o);
+            }
         }
 
         private void Start()
@@ -125,7 +135,10 @@ namespace RainingKeys.Components
             if (Input.GetKeyDown(Code))
             {
                 countText.text = $"{++elem.count}";
-                var k = Instantiate(highlightTemplate, highlightTemplate.transform.parent);
+                if (!HighlightPool.TryDequeue(out var k))
+                {
+                    k = Instantiate(highlightTemplate, highlightTemplate.transform.parent);
+                }
                 k.direction = position;
                 k.key = Code;
                 k.color = rainColor;

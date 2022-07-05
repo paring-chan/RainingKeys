@@ -378,6 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: 0
   color: {r: 0, g: 0, b: 0, a: 0}
+  keyComponent: {fileID: 1769642192184426456}
   image: {fileID: 1769642193265780390}
   rt: {fileID: 1769642193265780388}
   direction: 0
