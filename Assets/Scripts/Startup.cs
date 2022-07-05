@@ -87,6 +87,15 @@ namespace RainingKeys {
                     bool playing = !scrController.instance.paused && scrConductor.instance.isGameWorld;
                     showViewer &= playing;
                 }
+                else
+                {
+                    showViewer = false;
+                }
+
+                if (!showViewer && _config.showOnlyPlaying)
+                {
+                    showViewer = true;
+                }
 
                 if (showViewer != _container.gameObject.activeSelf)
                 {
@@ -277,6 +286,8 @@ namespace RainingKeys {
                 }
                 
                 GUILayout.EndHorizontal();
+
+                _config.showOnlyPlaying = GUILayout.Toggle(_config.showOnlyPlaying , "Show key viewer only in play mode");
 
                 if (GUILayout.Button("Reset Counts"))
                 {

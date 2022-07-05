@@ -23,6 +23,8 @@ namespace RainingKeys {
         public float y;
 
         public float size = 100f;
+
+        public bool showOnlyPlaying;
         
         public ViewerPosition position = ViewerPosition.Bottom;
 
