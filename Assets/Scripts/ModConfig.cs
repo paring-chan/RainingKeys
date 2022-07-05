@@ -25,7 +25,9 @@ namespace RainingKeys {
         public float size = 100f;
 
         public bool showOnlyPlaying;
-        
+
+        public string font;
+
         public ViewerPosition position = ViewerPosition.Bottom;
 
         public List<KeyElement> keys = new();

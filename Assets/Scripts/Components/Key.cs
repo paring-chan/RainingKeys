@@ -100,9 +100,6 @@ namespace RainingKeys.Components
 #if UNITY_EDITOR
             countText.font = AssetDatabase.LoadAssetAtPath<Font>("Assets/Fonts/NanumSquareRoundB.ttf");
             labelText.font = AssetDatabase.LoadAssetAtPath<Font>("Assets/Fonts/NanumSquareRoundB.ttf");
-#else
-            countText.font = RDString.GetFontDataForLanguage(RDString.language).font;
-            labelText.font = RDString.GetFontDataForLanguage(RDString.language).font;
 #endif
         }
 

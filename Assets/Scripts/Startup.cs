@@ -10,8 +10,10 @@ using UnityEngine.UI;
 using UnityModManagerNet;
 using Object = UnityEngine.Object;
 
-namespace RainingKeys {
-    internal static class Startup {
+namespace RainingKeys
+{
+    internal static class Startup
+    {
         private const string SettingPath = "Options/RainingKeys.json";
 
         private static ModConfig _config;
@@ -65,9 +67,23 @@ namespace RainingKeys {
 
             _container.position = new Vector2(_config.x, _config.y);
 
+            var font = RDString.GetFontDataForLanguage(RDString.language).font;
+
+            if (!string.IsNullOrEmpty(_config.font))
+            {
+                var f = Font.CreateDynamicFontFromOSFont(_config.font, 12);
+                if (f != null)
+                {
+                    font = f;
+                }
+            }
+
             foreach (var key in _config.keys)
             {
-                _container.AddKey(key);
+                var k = _container.AddKey(key);
+
+                k.countText.font = font;
+                k.labelText.font = font;
             }
         }
 
@@ -78,6 +94,10 @@ namespace RainingKeys {
 
         private static void Load(UnityModManager.ModEntry entry)
         {
+            var fonts = Font.GetOSInstalledFontNames().ToList()
+                .ToDictionary(x => x, x => Font.CreateDynamicFontFromOSFont(x, 12));
+            bool showFonts = false;
+
             entry.OnUpdate = (modEntry, f) =>
             {
                 bool showViewer = true;
@@ -274,9 +294,9 @@ namespace RainingKeys {
                     200f,
                     300f,
                     1f);
-                
+
                 GUILayout.BeginHorizontal();
-                
+
                 foreach (var name in Enum.GetNames(typeof(ViewerPosition)))
                 {
                     if (GUILayout.Button(name))
@@ -284,10 +304,53 @@ namespace RainingKeys {
                         _config.position = Enum.Parse<ViewerPosition>(name);
                     }
                 }
-                
+
                 GUILayout.EndHorizontal();
 
-                _config.showOnlyPlaying = GUILayout.Toggle(_config.showOnlyPlaying , "Show key viewer only in play mode");
+                GUILayout.Label("Font");
+
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button("Show installed font list"))
+                {
+                    showFonts = !showFonts;
+                }
+
+                if (GUILayout.Button("Reset Font"))
+                {
+                    _config.font = null;
+                }
+
+                GUILayout.EndHorizontal();
+
+                if (showFonts)
+                {
+                    MoreGUILayout.BeginIndent();
+
+                    foreach (var font in fonts)
+                    {
+                        GUILayout.BeginHorizontal();
+
+                        GUILayout.Label(font.Key, new GUIStyle(GUI.skin.label)
+                        {
+                            font = font.Value
+                        });
+
+                        if (_config.font != font.Key)
+                        {
+                            if (GUILayout.Button("Select", GUILayout.ExpandWidth(false)))
+                            {
+                                _config.font = font.Key;
+                            }
+                        }
+
+                        GUILayout.EndHorizontal();
+                    }
+
+                    MoreGUILayout.EndIndent();
+                }
+
+                _config.showOnlyPlaying =
+                    GUILayout.Toggle(_config.showOnlyPlaying, "Show key viewer only in play mode");
 
                 if (GUILayout.Button("Reset Counts"))
                 {

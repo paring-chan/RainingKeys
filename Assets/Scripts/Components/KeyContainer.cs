@@ -33,7 +33,7 @@ namespace RainingKeys.Components {
             rt.localScale = new Vector3(1, 1, 1) * (size / 100f);
         }
 
-        public void AddKey(KeyElement key)
+        public Key AddKey(KeyElement key)
         {
             var c = Instantiate(template, transform);
             
@@ -49,6 +49,8 @@ namespace RainingKeys.Components {
             c.gameObject.SetActive(true);
             Keys.Add(c);
             c.position = viewerPosition;
+
+            return c;
         }
     }
 }
