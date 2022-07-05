@@ -53,6 +53,8 @@ namespace RainingKeys
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1920, 1080);
 
+            canvas.sortingOrder = 1000;
+            
             _container = Object.Instantiate(ContainerTemplate, _obj.transform);
 
             _container.inactiveTextColor = _config.inactiveTextColor.Color;
