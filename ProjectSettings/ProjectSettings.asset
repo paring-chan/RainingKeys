@@ -565,20 +565,20 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Android: adanceoffireandice
-    CloudRendering: adanceoffireandice
-    EmbeddedLinux: adanceoffireandice
-    GameCoreXboxOne: adanceoffireandice
-    Lumin: adanceoffireandice
-    Nintendo Switch: adanceoffireandice
-    PS4: adanceoffireandice
-    PS5: adanceoffireandice
-    Stadia: adanceoffireandice
-    Standalone: adanceoffireandice
-    WebGL: adanceoffireandice
-    Windows Store Apps: adanceoffireandice
-    XboxOne: adanceoffireandice
-    tvOS: adanceoffireandice
+    Android: adanceoffireandice;TK_ADDRESSABLE
+    CloudRendering: adanceoffireandice;TK_ADDRESSABLE
+    EmbeddedLinux: adanceoffireandice;TK_ADDRESSABLE
+    GameCoreXboxOne: adanceoffireandice;TK_ADDRESSABLE
+    Lumin: adanceoffireandice;TK_ADDRESSABLE
+    Nintendo Switch: adanceoffireandice;TK_ADDRESSABLE
+    PS4: adanceoffireandice;TK_ADDRESSABLE
+    PS5: adanceoffireandice;TK_ADDRESSABLE
+    Stadia: adanceoffireandice;TK_ADDRESSABLE
+    Standalone: adanceoffireandice;TK_ADDRESSABLE
+    WebGL: adanceoffireandice;TK_ADDRESSABLE
+    Windows Store Apps: adanceoffireandice;TK_ADDRESSABLE
+    XboxOne: adanceoffireandice;TK_ADDRESSABLE
+    tvOS: adanceoffireandice;TK_ADDRESSABLE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:editor="UnityEditor.UIElements" xmlns:engine="UnityEngine.UIElements" xmlns="UnityEditor.Overlays" elementFormDefault="qualified" targetNamespace="ThunderKit.Markdown" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="UnityEngine.UIElements.xsd" namespace="UnityEngine.UIElements" />
+  <xs:simpleType name="MarkdownElement_markdown-data-type_Type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Implicit" />
+      <xs:enumeration value="Source" />
+      <xs:enumeration value="Text" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="MarkdownElementType">
+    <xs:complexContent mixed="false">
+      <xs:restriction base="engine:VisualElementType">
+        <xs:attribute default="" name="name" type="xs:string" use="optional" />
+        <xs:attribute default="" name="view-data-key" type="xs:string" use="optional" />
+        <xs:attribute default="Position" name="picking-mode" type="engine:VisualElement_picking-mode_Type" use="optional" />
+        <xs:attribute default="" name="tooltip" type="xs:string" use="optional" />
+        <xs:attribute default="None" name="usage-hints" type="engine:VisualElement_usage-hints_Type" use="optional" />
+        <xs:attribute default="0" name="tabindex" type="xs:int" use="optional" />
+        <xs:attribute default="false" name="focusable" type="xs:boolean" use="optional" />
+        <xs:attribute default="" name="class" type="xs:string" use="optional" />
+        <xs:attribute default="" name="content-container" type="xs:string" use="optional" />
+        <xs:attribute default="" name="style" type="xs:string" use="optional" />
+        <xs:attribute default="" name="data" type="xs:string" use="optional" />
+        <xs:attribute default="Implicit" name="markdown-data-type" xmlns:q1="ThunderKit.Markdown" type="q1:MarkdownElement_markdown-data-type_Type" use="optional" />
+        <xs:attribute default="true" name="empty-line-after-code-block" type="xs:boolean" use="optional" />
+        <xs:attribute default="true" name="empty-line-after-heading" type="xs:boolean" use="optional" />
+        <xs:attribute default="true" name="empty-line-after-thematic-break" type="xs:boolean" use="optional" />
+        <xs:attribute default="true" name="expand-auto-links" type="xs:boolean" use="optional" />
+        <xs:attribute default="*" name="list-item-character" type="xs:string" use="optional" />
+        <xs:attribute default="true" name="space-after-quote-block" type="xs:boolean" use="optional" />
+        <xs:anyAttribute processContents="lax" />
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MarkdownElement" substitutionGroup="engine:VisualElement" xmlns:q2="ThunderKit.Markdown" type="q2:MarkdownElementType" />
+</xs:schema>
