@@ -67,16 +67,14 @@ namespace RainingKeys
 
             _container.position = new Vector2(_config.x, _config.y);
 
-            var font = RDString.GetFontDataForLanguage(RDString.language).font;
+            Font font = null;
 
             if (!string.IsNullOrEmpty(_config.font))
             {
-                var f = Font.CreateDynamicFontFromOSFont(_config.font, 12);
-                if (f != null)
-                {
-                    font = f;
-                }
+                _fonts.TryGetValue(_config.font, out font);
             }
+
+            font ??= RDString.GetFontDataForLanguage(RDString.language).font;
 
             foreach (var key in _config.keys)
             {
@@ -92,9 +90,11 @@ namespace RainingKeys
             File.WriteAllText(SettingPath, JsonConvert.SerializeObject(_config));
         }
 
+        private static Dictionary<string, Font> _fonts;
+
         private static void Load(UnityModManager.ModEntry entry)
         {
-            var fonts = Font.GetOSInstalledFontNames().ToList()
+            _fonts = Font.GetOSInstalledFontNames().ToList()
                 .ToDictionary(x => x, x => Font.CreateDynamicFontFromOSFont(x, 12));
             bool showFonts = false;
 
@@ -326,7 +326,7 @@ namespace RainingKeys
                 {
                     MoreGUILayout.BeginIndent();
 
-                    foreach (var font in fonts)
+                    foreach (var font in _fonts)
                     {
                         GUILayout.BeginHorizontal();
 
