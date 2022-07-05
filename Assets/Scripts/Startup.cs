@@ -112,7 +112,7 @@ namespace RainingKeys
                     showViewer = false;
                 }
 
-                if (!showViewer && _config.showOnlyPlaying)
+                if (!showViewer && !_config.showOnlyPlaying)
                 {
                     showViewer = true;
                 }
