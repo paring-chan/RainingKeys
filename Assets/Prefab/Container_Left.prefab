@@ -204,7 +204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1769642192819243257, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
       propertyPath: m_Softness.x
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1769642192819243257, guid: 0594f1ed5ce4302478aa4672026badf5, type: 3}
       propertyPath: m_Softness.y
