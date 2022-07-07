@@ -162,16 +162,24 @@ namespace RainingKeys
                     }
 
                     GUILayout.Label("Press keys to register or unregister");
-                    if (Event.current.isKey && Event.current.type == EventType.KeyDown &&
-                        Event.current.keyCode != KeyCode.None)
+                    
+                    var mouse = Enum.TryParse<KeyCode>($"Mouse{Event.current.button}", out var k);
+                    
+                    if ((Event.current.isKey && Event.current.type == EventType.KeyDown &&
+                         Event.current.keyCode != KeyCode.None) || (Event.current.isMouse && Event.current.type == EventType.MouseDown))
                     {
+                        if (!mouse)
+                        {
+                            k = Event.current.keyCode;
+                        }
+                        
                         var deleted = false;
 
                         for (var i = 0; i < _config.keys.Count; i++)
                         {
                             var key = _config.keys[i];
 
-                            if (key.key == Event.current.keyCode)
+                            if (key.key == k)
                             {
                                 _config.keys.RemoveAt(i);
                                 deleted = true;
@@ -183,7 +191,7 @@ namespace RainingKeys
                         {
                             _config.keys.Add(new KeyElement
                             {
-                                key = Event.current.keyCode,
+                                key = k,
                                 count = 0
                             });
                         }
