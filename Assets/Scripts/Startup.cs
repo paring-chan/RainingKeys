@@ -168,7 +168,7 @@ namespace RainingKeys
                     if ((Event.current.isKey && Event.current.type == EventType.KeyDown &&
                          Event.current.keyCode != KeyCode.None) || (Event.current.isMouse && Event.current.type == EventType.MouseDown))
                     {
-                        if (!mouse)
+                        if (!Event.current.isMouse)
                         {
                             k = Event.current.keyCode;
                         }
