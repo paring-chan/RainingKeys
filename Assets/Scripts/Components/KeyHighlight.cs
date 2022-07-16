@@ -3,7 +3,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace RainingKeys.Components {
-    public class KeyHighlight : MonoBehaviour {
+    public class KeyHighlight : MonoBehaviour
+    {
+        private const float ContainerSize = 400;
+        
         public KeyCode key;
         public Color color;
         public Key keyComponent;
@@ -51,13 +54,13 @@ namespace RainingKeys.Components {
             switch (direction)
             {
                 case ViewerPosition.Top:
-                    return -rt.anchoredPosition.y - rt.sizeDelta.y > 400;
+                    return -rt.anchoredPosition.y - rt.sizeDelta.y > ContainerSize;
                 case ViewerPosition.Bottom:
-                    return rt.anchoredPosition.y - rt.sizeDelta.y > 400;
+                    return rt.anchoredPosition.y - rt.sizeDelta.y > ContainerSize;
                 case ViewerPosition.Left:
-                    return rt.anchoredPosition.x - rt.sizeDelta.x > 400;
+                    return rt.anchoredPosition.x - rt.sizeDelta.x > ContainerSize;
                 case ViewerPosition.Right:
-                    return -rt.anchoredPosition.x - rt.sizeDelta.x > 400;
+                    return -rt.anchoredPosition.x - rt.sizeDelta.x > ContainerSize;
             }
             return false;
         }
