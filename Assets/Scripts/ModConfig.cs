@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RainingKeys {
+namespace RainingKeys
+{
     [Serializable]
-    public class KeyElement {
+    public class KeyElement
+    {
         public KeyCode key;
         public ulong count;
     }
 
     [Serializable]
-    public class ModConfig {
+    public class ModConfig
+    {
         public SerializableColor inactiveTextColor = new(47, 66, 255);
         public SerializableColor activeTextColor = new(Color.white);
         public SerializableColor inactiveCountTextColor = new(Color.white);
@@ -18,6 +21,8 @@ namespace RainingKeys {
         public SerializableColor inactiveLineColor = new(Color.white);
         public SerializableColor activeLineColor = new(47, 66, 255);
         public SerializableColor rainColor = new(47, 66, 255);
+
+        public float rainSpeed = 400f;
 
         public float x = 0.5f;
         public float y;

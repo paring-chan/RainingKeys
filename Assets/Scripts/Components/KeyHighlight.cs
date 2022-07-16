@@ -78,7 +78,7 @@ namespace RainingKeys.Components {
                 return;
             }
             
-            var toMove = Time.unscaledDeltaTime * 400f;
+            var toMove = Time.unscaledDeltaTime * Values.RainSpeed;
             var sizeDelta = rt.sizeDelta;
             var delta = GetSizeDelta(toMove);
             if (Input.GetKey(key) && !_ended)

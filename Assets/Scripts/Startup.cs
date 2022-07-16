@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using AdofaiTweaks.Core;
@@ -39,6 +40,8 @@ namespace RainingKeys
                 _container = null;
             }
 
+            Values.RainSpeed = _config.rainSpeed;
+
             _obj = new GameObject("KeyViewer Canvas");
 
             Object.DontDestroyOnLoad(_obj);
@@ -54,7 +57,7 @@ namespace RainingKeys
             scaler.referenceResolution = new Vector2(1920, 1080);
 
             canvas.sortingOrder = 1000;
-            
+
             _container = Object.Instantiate(ContainerTemplate, _obj.transform);
 
             _container.inactiveTextColor = _config.inactiveTextColor.Color;
@@ -100,7 +103,7 @@ namespace RainingKeys
                 .ToDictionary(x => x, x => Font.CreateDynamicFontFromOSFont(x, 12));
             bool showFonts = false;
 
-            entry.OnUpdate = (modEntry, f) =>
+            entry.OnUpdate = (_, _) =>
             {
                 bool showViewer = true;
                 if (scrController.instance != null
@@ -162,17 +165,18 @@ namespace RainingKeys
                     }
 
                     GUILayout.Label("Press keys to register or unregister");
-                    
-                    var mouse = Enum.TryParse<KeyCode>($"Mouse{Event.current.button}", out var k);
-                    
+
+                    Enum.TryParse<KeyCode>($"Mouse{Event.current.button}", out var k);
+
                     if ((Event.current.isKey && Event.current.type == EventType.KeyDown &&
-                         Event.current.keyCode != KeyCode.None) || (Event.current.isMouse && Event.current.type == EventType.MouseDown))
+                         Event.current.keyCode != KeyCode.None) ||
+                        (Event.current.isMouse && Event.current.type == EventType.MouseDown))
                     {
                         if (!Event.current.isMouse)
                         {
                             k = Event.current.keyCode;
                         }
-                        
+
                         var deleted = false;
 
                         for (var i = 0; i < _config.keys.Count; i++)
@@ -206,6 +210,20 @@ namespace RainingKeys
                 }
 
                 GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+                
+                GUILayout.BeginVertical();
+                GUILayout.Label("Rain Speed");
+                var newRainSpeed = GUILayout.TextField(_config.rainSpeed.ToString(CultureInfo.InvariantCulture));
+                GUILayout.EndVertical();
+                
+                GUILayout.EndHorizontal();
+
+                if (float.TryParse(newRainSpeed, out var speed))
+                {
+                    _config.rainSpeed = speed;
+                }
 
                 GUILayout.BeginHorizontal();
                 GUILayout.Label(
