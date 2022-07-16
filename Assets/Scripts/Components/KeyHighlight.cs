@@ -5,8 +5,6 @@ using UnityEngine.UI;
 namespace RainingKeys.Components {
     public class KeyHighlight : MonoBehaviour
     {
-        private const float ContainerSize = 400;
-        
         public KeyCode key;
         public Color color;
         public Key keyComponent;
@@ -54,13 +52,13 @@ namespace RainingKeys.Components {
             switch (direction)
             {
                 case ViewerPosition.Top:
-                    return -rt.anchoredPosition.y - rt.sizeDelta.y > ContainerSize;
+                    return -rt.anchoredPosition.y - rt.sizeDelta.y > Values.RainTrackSize;
                 case ViewerPosition.Bottom:
-                    return rt.anchoredPosition.y - rt.sizeDelta.y > ContainerSize;
+                    return rt.anchoredPosition.y - rt.sizeDelta.y > Values.RainTrackSize;
                 case ViewerPosition.Left:
-                    return rt.anchoredPosition.x - rt.sizeDelta.x > ContainerSize;
+                    return rt.anchoredPosition.x - rt.sizeDelta.x > Values.RainTrackSize;
                 case ViewerPosition.Right:
-                    return -rt.anchoredPosition.x - rt.sizeDelta.x > ContainerSize;
+                    return -rt.anchoredPosition.x - rt.sizeDelta.x > Values.RainTrackSize;
             }
             return false;
         }

@@ -41,6 +41,7 @@ namespace RainingKeys
             }
 
             Values.RainSpeed = _config.rainSpeed;
+            Values.RainTrackSize = _config.trackLength;
 
             _obj = new GameObject("KeyViewer Canvas");
 
@@ -217,12 +218,22 @@ namespace RainingKeys
                 GUILayout.Label("Rain Speed");
                 var newRainSpeed = GUILayout.TextField(_config.rainSpeed.ToString(CultureInfo.InvariantCulture));
                 GUILayout.EndVertical();
-                
+
+                GUILayout.BeginVertical();
+                GUILayout.Label("Track Length");
+                var newTrackSize = GUILayout.TextField(_config.trackLength.ToString(CultureInfo.InvariantCulture));
+                GUILayout.EndVertical();
+
                 GUILayout.EndHorizontal();
 
                 if (float.TryParse(newRainSpeed, out var speed))
                 {
                     _config.rainSpeed = speed;
+                }
+                
+                if (float.TryParse(newTrackSize, out var len))
+                {
+                    _config.trackLength = len;
                 }
 
                 GUILayout.BeginHorizontal();

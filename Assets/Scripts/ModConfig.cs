@@ -23,6 +23,7 @@ namespace RainingKeys
         public SerializableColor rainColor = new(47, 66, 255);
 
         public float rainSpeed = 400f;
+        public float trackLength = 400f;
 
         public float x = 0.5f;
         public float y;

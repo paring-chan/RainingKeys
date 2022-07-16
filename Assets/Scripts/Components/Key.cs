@@ -16,8 +16,7 @@ namespace RainingKeys.Components
         public Color activeLineColor;
         public Color rainColor;
 
-        [NonSerialized]
-        public readonly Queue<KeyHighlight> HighlightPool = new();
+        [NonSerialized] public readonly Queue<KeyHighlight> HighlightPool = new();
 
         public KeyElement elem;
 
@@ -123,6 +122,24 @@ namespace RainingKeys.Components
             labelText.text = code;
 
             countText.text = $"{elem.count}";
+
+            var rt = (RectTransform)highlightTemplate.transform.parent;
+
+            var size = rt.sizeDelta;
+
+            switch (position)
+            {
+                case ViewerPosition.Left:
+                case ViewerPosition.Right:
+                    size.x = Values.RainTrackSize;
+                    break;
+                case ViewerPosition.Top:
+                case ViewerPosition.Bottom:
+                    size.y = Values.RainTrackSize;
+                    break;
+            }
+
+            rt.sizeDelta = size;
         }
 
         private void Update()
@@ -139,6 +156,7 @@ namespace RainingKeys.Components
                 {
                     k = Instantiate(highlightTemplate, highlightTemplate.transform.parent);
                 }
+
                 k.direction = position;
                 k.key = Code;
                 k.color = rainColor;
