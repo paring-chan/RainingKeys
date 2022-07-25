@@ -31,6 +31,8 @@ namespace RainingKeys
 
         private static readonly Dictionary<ViewerPosition, KeyContainer> Positions = new();
 
+        private static Font defaultFont;
+
         private static void Repaint()
         {
             if (_obj != null && _container != null)
@@ -80,7 +82,7 @@ namespace RainingKeys
                 _fonts.TryGetValue(_config.font, out font);
             }
 
-            font ??= RDString.GetFontDataForLanguage(RDString.language).font;
+            font ??= defaultFont;
 
             foreach (var key in _config.keys)
             {
@@ -100,8 +102,17 @@ namespace RainingKeys
 
         private static void Load(UnityModManager.ModEntry entry)
         {
-            _fonts = Font.GetOSInstalledFontNames().ToList()
-                .ToDictionary(x => x, x => Font.CreateDynamicFontFromOSFont(x, 12));
+            _config = File.Exists(SettingPath)
+                ? JsonConvert.DeserializeObject<ModConfig>(File.ReadAllText(SettingPath))
+                : new();
+
+            defaultFont = RDString.GetFontDataForLanguage(RDString.language).font;
+
+            _fonts = _config!.enableCustomFonts
+                ? Font.GetOSInstalledFontNames().ToList()
+                    .ToDictionary(x => x, x => Font.CreateDynamicFontFromOSFont(x, 12))
+                : new();
+
             bool showFonts = false;
 
             entry.OnUpdate = (_, _) =>
@@ -144,11 +155,6 @@ namespace RainingKeys
             {
                 Directory.CreateDirectory("Options");
             }
-
-
-            _config = File.Exists(SettingPath)
-                ? JsonConvert.DeserializeObject<ModConfig>(File.ReadAllText(SettingPath))
-                : new();
 
             entry.OnGUI = _ =>
             {
@@ -213,7 +219,7 @@ namespace RainingKeys
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
-                
+
                 GUILayout.BeginVertical();
                 GUILayout.Label("Rain Speed");
                 var newRainSpeed = GUILayout.TextField(_config.rainSpeed.ToString(CultureInfo.InvariantCulture));
@@ -230,7 +236,7 @@ namespace RainingKeys
                 {
                     _config.rainSpeed = speed;
                 }
-                
+
                 if (float.TryParse(newTrackSize, out var len))
                 {
                     _config.trackLength = len;
@@ -346,46 +352,49 @@ namespace RainingKeys
 
                 GUILayout.EndHorizontal();
 
-                GUILayout.Label("Font");
-
-                GUILayout.BeginHorizontal();
-                if (GUILayout.Button("Show installed font list"))
+                if (_config.enableCustomFonts)
                 {
-                    showFonts = !showFonts;
-                }
+                    GUILayout.Label("Font");
 
-                if (GUILayout.Button("Reset Font"))
-                {
-                    _config.font = null;
-                }
-
-                GUILayout.EndHorizontal();
-
-                if (showFonts)
-                {
-                    MoreGUILayout.BeginIndent();
-
-                    foreach (var font in _fonts)
+                    GUILayout.BeginHorizontal();
+                    if (GUILayout.Button("Show installed font list"))
                     {
-                        GUILayout.BeginHorizontal();
-
-                        GUILayout.Label(font.Key, new GUIStyle(GUI.skin.label)
-                        {
-                            font = font.Value
-                        });
-
-                        if (_config.font != font.Key)
-                        {
-                            if (GUILayout.Button("Select", GUILayout.ExpandWidth(false)))
-                            {
-                                _config.font = font.Key;
-                            }
-                        }
-
-                        GUILayout.EndHorizontal();
+                        showFonts = !showFonts;
                     }
 
-                    MoreGUILayout.EndIndent();
+                    if (GUILayout.Button("Reset Font"))
+                    {
+                        _config.font = null;
+                    }
+
+                    GUILayout.EndHorizontal();
+
+                    if (showFonts)
+                    {
+                        MoreGUILayout.BeginIndent();
+
+                        foreach (var font in _fonts)
+                        {
+                            GUILayout.BeginHorizontal();
+
+                            GUILayout.Label(font.Key, new GUIStyle(GUI.skin.label)
+                            {
+                                font = font.Value
+                            });
+
+                            if (_config.font != font.Key)
+                            {
+                                if (GUILayout.Button("Select", GUILayout.ExpandWidth(false)))
+                                {
+                                    _config.font = font.Key;
+                                }
+                            }
+
+                            GUILayout.EndHorizontal();
+                        }
+
+                        MoreGUILayout.EndIndent();
+                    }
                 }
 
                 _config.showOnlyPlaying =

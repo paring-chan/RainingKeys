@@ -21,6 +21,8 @@ namespace RainingKeys
         public SerializableColor inactiveLineColor = new(Color.white);
         public SerializableColor activeLineColor = new(47, 66, 255);
         public SerializableColor rainColor = new(47, 66, 255);
+        
+        public bool enableCustomFonts = true;
 
         public float rainSpeed = 400f;
         public float trackLength = 400f;
