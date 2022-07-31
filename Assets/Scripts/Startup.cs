@@ -35,6 +35,10 @@ namespace RainingKeys
 
         private static void Repaint()
         {
+            if (!ContainerTemplate)
+            {
+                return;
+            }
             if (_obj != null && _container != null)
             {
                 Object.Destroy(_obj);
@@ -413,7 +417,7 @@ namespace RainingKeys
                     }
                 }
             };
-
+            
             entry.OnSaveGUI = _ =>
             {
                 SaveConfig();
