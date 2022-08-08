@@ -17,13 +17,13 @@ namespace RainingKeys
     {
         private const string SettingPath = "Options/RainingKeys.json";
 
-        private static ModConfig _config;
+        public static ModConfig Config;
 
         private static bool _recording;
 
-        private static KeyContainer ContainerTemplate => Positions[_config.position];
+        private static KeyContainer ContainerTemplate => Positions[Config.position];
 
-        private static KeyContainer _container;
+        internal static KeyContainer Container;
 
         private static Canvas _canvas;
 
@@ -39,15 +39,15 @@ namespace RainingKeys
             {
                 return;
             }
-            if (_obj != null && _container != null)
+            if (_obj != null && Container != null)
             {
                 Object.Destroy(_obj);
                 _obj = null;
-                _container = null;
+                Container = null;
             }
 
-            Values.RainSpeed = _config.rainSpeed;
-            Values.RainTrackSize = _config.trackLength;
+            Values.RainSpeed = Config.rainSpeed;
+            Values.RainTrackSize = Config.trackLength;
 
             _obj = new GameObject("KeyViewer Canvas");
 
@@ -65,32 +65,32 @@ namespace RainingKeys
 
             canvas.sortingOrder = 1000;
 
-            _container = Object.Instantiate(ContainerTemplate, _obj.transform);
+            Container = Object.Instantiate(ContainerTemplate, _obj.transform);
 
-            _container.inactiveTextColor = _config.inactiveTextColor.Color;
-            _container.activeTextColor = _config.activeTextColor.Color;
-            _container.inactiveLineColor = _config.inactiveLineColor.Color;
-            _container.activeLineColor = _config.activeLineColor.Color;
-            _container.inactiveCountTextColor = _config.inactiveCountTextColor.Color;
-            _container.activeCountTextColor = _config.activeCountTextColor.Color;
-            _container.rainColor = _config.rainColor.Color;
+            Container.inactiveTextColor = Config.inactiveTextColor.Color;
+            Container.activeTextColor = Config.activeTextColor.Color;
+            Container.inactiveLineColor = Config.inactiveLineColor.Color;
+            Container.activeLineColor = Config.activeLineColor.Color;
+            Container.inactiveCountTextColor = Config.inactiveCountTextColor.Color;
+            Container.activeCountTextColor = Config.activeCountTextColor.Color;
+            Container.rainColor = Config.rainColor.Color;
 
-            _container.size = _config.size;
+            Container.size = Config.size;
 
-            _container.position = new Vector2(_config.x, _config.y);
+            Container.position = new Vector2(Config.x, Config.y);
 
             Font font = null;
 
-            if (!string.IsNullOrEmpty(_config.font))
+            if (!string.IsNullOrEmpty(Config.font))
             {
-                _fonts.TryGetValue(_config.font, out font);
+                _fonts.TryGetValue(Config.font, out font);
             }
 
             font ??= defaultFont;
 
-            foreach (var key in _config.keys)
+            foreach (var key in Config.keys)
             {
-                var k = _container.AddKey(key);
+                var k = Container.AddKey(key);
 
                 k.countText.font = font;
                 k.labelText.font = font;
@@ -99,20 +99,20 @@ namespace RainingKeys
 
         internal static void SaveConfig()
         {
-            File.WriteAllText(SettingPath, JsonConvert.SerializeObject(_config));
+            File.WriteAllText(SettingPath, JsonConvert.SerializeObject(Config));
         }
 
         private static Dictionary<string, Font> _fonts;
 
         private static void Load(UnityModManager.ModEntry entry)
         {
-            _config = File.Exists(SettingPath)
+            Config = File.Exists(SettingPath)
                 ? JsonConvert.DeserializeObject<ModConfig>(File.ReadAllText(SettingPath))
                 : new();
 
             defaultFont = RDString.GetFontDataForLanguage(RDString.language).font;
 
-            _fonts = _config!.enableCustomFonts
+            _fonts = Config!.enableCustomFonts
                 ? Font.GetOSInstalledFontNames().ToList()
                     .ToDictionary(x => x, x => Font.CreateDynamicFontFromOSFont(x, 12))
                 : new();
@@ -133,14 +133,14 @@ namespace RainingKeys
                     showViewer = false;
                 }
 
-                if (!showViewer && !_config.showOnlyPlaying)
+                if (!showViewer && !Config.showOnlyPlaying)
                 {
                     showViewer = true;
                 }
 
-                if (showViewer != _container.gameObject.activeSelf)
+                if (showViewer != Container.gameObject.activeSelf)
                 {
-                    _container.gameObject.SetActive(showViewer);
+                    Container.gameObject.SetActive(showViewer);
                 }
             };
 
@@ -164,7 +164,7 @@ namespace RainingKeys
             {
                 GUILayout.Label("Keys");
 
-                GUILayout.Label(String.Join(", ", _config.keys.Select(i => i.key.ToString())));
+                GUILayout.Label(String.Join(", ", Config.keys.Select(i => i.key.ToString())));
 
                 GUILayout.BeginHorizontal();
 
@@ -190,13 +190,13 @@ namespace RainingKeys
 
                         var deleted = false;
 
-                        for (var i = 0; i < _config.keys.Count; i++)
+                        for (var i = 0; i < Config.keys.Count; i++)
                         {
-                            var key = _config.keys[i];
+                            var key = Config.keys[i];
 
                             if (key.key == k)
                             {
-                                _config.keys.RemoveAt(i);
+                                Config.keys.RemoveAt(i);
                                 deleted = true;
                                 break;
                             }
@@ -204,7 +204,7 @@ namespace RainingKeys
 
                         if (!deleted)
                         {
-                            _config.keys.Add(new KeyElement
+                            Config.keys.Add(new KeyElement
                             {
                                 key = k,
                                 count = 0
@@ -226,24 +226,24 @@ namespace RainingKeys
 
                 GUILayout.BeginVertical();
                 GUILayout.Label("Rain Speed");
-                var newRainSpeed = GUILayout.TextField(_config.rainSpeed.ToString(CultureInfo.InvariantCulture));
+                var newRainSpeed = GUILayout.TextField(Config.rainSpeed.ToString(CultureInfo.InvariantCulture));
                 GUILayout.EndVertical();
 
                 GUILayout.BeginVertical();
                 GUILayout.Label("Track Length");
-                var newTrackSize = GUILayout.TextField(_config.trackLength.ToString(CultureInfo.InvariantCulture));
+                var newTrackSize = GUILayout.TextField(Config.trackLength.ToString(CultureInfo.InvariantCulture));
                 GUILayout.EndVertical();
 
                 GUILayout.EndHorizontal();
 
                 if (float.TryParse(newRainSpeed, out var speed))
                 {
-                    _config.rainSpeed = speed;
+                    Config.rainSpeed = speed;
                 }
 
                 if (float.TryParse(newTrackSize, out var len))
                 {
-                    _config.trackLength = len;
+                    Config.trackLength = len;
                 }
 
                 GUILayout.BeginHorizontal();
@@ -260,8 +260,8 @@ namespace RainingKeys
                 GUILayout.EndHorizontal();
                 MoreGUILayout.BeginIndent();
 
-                (_config.inactiveTextColor.Color, _config.activeTextColor.Color) = MoreGUILayout.ColorRgbaSlidersPair(
-                    _config.inactiveTextColor.Color, _config.activeTextColor.Color);
+                (Config.inactiveTextColor.Color, Config.activeTextColor.Color) = MoreGUILayout.ColorRgbaSlidersPair(
+                    Config.inactiveTextColor.Color, Config.activeTextColor.Color);
 
                 MoreGUILayout.EndIndent();
 
@@ -279,9 +279,9 @@ namespace RainingKeys
                 GUILayout.EndHorizontal();
                 MoreGUILayout.BeginIndent();
 
-                (_config.inactiveCountTextColor.Color, _config.activeCountTextColor.Color) =
+                (Config.inactiveCountTextColor.Color, Config.activeCountTextColor.Color) =
                     MoreGUILayout.ColorRgbaSlidersPair(
-                        _config.inactiveCountTextColor.Color, _config.activeCountTextColor.Color);
+                        Config.inactiveCountTextColor.Color, Config.activeCountTextColor.Color);
 
                 MoreGUILayout.EndIndent();
 
@@ -299,8 +299,8 @@ namespace RainingKeys
                 GUILayout.EndHorizontal();
                 MoreGUILayout.BeginIndent();
 
-                (_config.inactiveLineColor.Color, _config.activeLineColor.Color) = MoreGUILayout.ColorRgbaSlidersPair(
-                    _config.inactiveLineColor.Color, _config.activeLineColor.Color);
+                (Config.inactiveLineColor.Color, Config.activeLineColor.Color) = MoreGUILayout.ColorRgbaSlidersPair(
+                    Config.inactiveLineColor.Color, Config.activeLineColor.Color);
 
                 MoreGUILayout.EndIndent();
 
@@ -308,26 +308,26 @@ namespace RainingKeys
 
                 MoreGUILayout.BeginIndent();
 
-                _config.rainColor.Color = Util.ColorRgbaSliders(_config.rainColor.Color);
+                Config.rainColor.Color = Util.ColorRgbaSliders(Config.rainColor.Color);
 
                 MoreGUILayout.EndIndent();
 
                 GUILayout.BeginHorizontal();
 
-                _config.x =
+                Config.x =
                     MoreGUILayout.NamedSlider(
                         "X",
-                        _config.x,
+                        Config.x,
                         0f,
                         1f,
                         300f,
                         0.01f,
                         valueFormat: "{0:0.##}");
 
-                _config.y =
+                Config.y =
                     MoreGUILayout.NamedSlider(
                         "Y",
-                        _config.y,
+                        Config.y,
                         0f,
                         1f,
                         300f,
@@ -336,9 +336,9 @@ namespace RainingKeys
 
                 GUILayout.EndHorizontal();
 
-                _config.size = MoreGUILayout.NamedSlider(
+                Config.size = MoreGUILayout.NamedSlider(
                     "Size",
-                    _config.size,
+                    Config.size,
                     10f,
                     200f,
                     300f,
@@ -350,13 +350,13 @@ namespace RainingKeys
                 {
                     if (GUILayout.Button(name))
                     {
-                        _config.position = Enum.Parse<ViewerPosition>(name);
+                        Config.position = Enum.Parse<ViewerPosition>(name);
                     }
                 }
 
                 GUILayout.EndHorizontal();
 
-                if (_config.enableCustomFonts)
+                if (Config.enableCustomFonts)
                 {
                     GUILayout.Label("Font");
 
@@ -368,7 +368,7 @@ namespace RainingKeys
 
                     if (GUILayout.Button("Reset Font"))
                     {
-                        _config.font = null;
+                        Config.font = null;
                     }
 
                     GUILayout.EndHorizontal();
@@ -386,11 +386,11 @@ namespace RainingKeys
                                 font = font.Value
                             });
 
-                            if (_config.font != font.Key)
+                            if (Config.font != font.Key)
                             {
                                 if (GUILayout.Button("Select", GUILayout.ExpandWidth(false)))
                                 {
-                                    _config.font = font.Key;
+                                    Config.font = font.Key;
                                 }
                             }
 
@@ -401,17 +401,17 @@ namespace RainingKeys
                     }
                 }
 
-                _config.showOnlyPlaying =
-                    GUILayout.Toggle(_config.showOnlyPlaying, "Show key viewer only in play mode");
+                Config.showOnlyPlaying =
+                    GUILayout.Toggle(Config.showOnlyPlaying, "Show key viewer only in play mode");
 
                 if (GUILayout.Button("Reset Counts"))
                 {
-                    foreach (var key in _config.keys)
+                    foreach (var key in Config.keys)
                     {
                         key.count = 0;
                     }
 
-                    foreach (var key in _container.Keys)
+                    foreach (var (_, key) in Container.Keys)
                     {
                         key.countText.text = "0";
                     }
@@ -436,7 +436,7 @@ namespace RainingKeys
                     {
                         Object.Destroy(_canvas);
                         _canvas = null;
-                        _container = null;
+                        Container = null;
                     }
                 }
 

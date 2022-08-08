@@ -1733,6 +1733,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8495041767434401395, guid: a09492a2cb1bcd9409532b1e050df195, type: 3}
+      propertyPath: size
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8495041767434401395, guid: a09492a2cb1bcd9409532b1e050df195, type: 3}
       propertyPath: position.x
       value: 0.5
       objectReference: {fileID: 0}

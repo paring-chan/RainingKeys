@@ -36,6 +36,8 @@ namespace RainingKeys.Components
 
         private KeyCode Code => elem.key;
 
+        public bool controlled;
+
         private static readonly Dictionary<KeyCode, string> KeyToString =
             new()
             {
@@ -110,6 +112,8 @@ namespace RainingKeys.Components
                 o.gameObject.SetActive(false);
                 HighlightPool.Enqueue(o);
             }
+            
+            Up();
         }
 
         private void Start()
@@ -142,25 +146,54 @@ namespace RainingKeys.Components
             rt.sizeDelta = size;
         }
 
+        private KeyHighlight _highlight;
+
+        public void Down()
+        {
+            highlightImage.color = activeLineColor;
+            labelText.color = activeTextColor;
+            countText.color = activeCountTextColor;
+            
+            if (_highlight)
+            {
+                return;
+            }
+
+            if (!HighlightPool.TryDequeue(out var k))
+            {
+                k = Instantiate(highlightTemplate, highlightTemplate.transform.parent);
+            }
+
+            _highlight = k;
+
+            k.direction = position;
+            k.color = rainColor;
+            k.gameObject.SetActive(true);
+        }
+
+        public void Up()
+        {
+            highlightImage.color = inactiveLineColor;
+            labelText.color = inactiveTextColor;
+            countText.color = inactiveCountTextColor;
+
+            if (_highlight) _highlight.ended = true;
+
+            _highlight = null;
+        }
+
         private void Update()
         {
-            var pressed = Input.GetKey(Code);
-            highlightImage.color = pressed ? activeLineColor : inactiveLineColor;
-            labelText.color = pressed ? activeTextColor : inactiveTextColor;
-            countText.color = pressed ? activeCountTextColor : inactiveCountTextColor;
+            if (controlled) return;
 
             if (Input.GetKeyDown(Code))
             {
                 countText.text = $"{++elem.count}";
-                if (!HighlightPool.TryDequeue(out var k))
-                {
-                    k = Instantiate(highlightTemplate, highlightTemplate.transform.parent);
-                }
-
-                k.direction = position;
-                k.key = Code;
-                k.color = rainColor;
-                k.gameObject.SetActive(true);
+                Down();
+            }
+            else if (Input.GetKeyUp(Code))
+            {
+                Up();
             }
         }
     }

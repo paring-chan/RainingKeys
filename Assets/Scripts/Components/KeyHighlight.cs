@@ -5,7 +5,6 @@ using UnityEngine.UI;
 namespace RainingKeys.Components {
     public class KeyHighlight : MonoBehaviour
     {
-        public KeyCode key;
         public Color color;
         public Key keyComponent;
 
@@ -15,7 +14,7 @@ namespace RainingKeys.Components {
 
         public ViewerPosition direction;
 
-        private bool _ended;
+        public bool ended;
 
         private Vector2 _initialPosition;
         private Vector2 _initialSize;
@@ -69,7 +68,7 @@ namespace RainingKeys.Components {
             {
                 rt.sizeDelta = _initialSize;
                 rt.anchoredPosition = _initialPosition;
-                _ended = false;
+                ended = false;
                 gameObject.SetActive(false);
 
                 keyComponent.HighlightPool.Enqueue(this);
@@ -79,14 +78,10 @@ namespace RainingKeys.Components {
             var toMove = Time.unscaledDeltaTime * Values.RainSpeed;
             var sizeDelta = rt.sizeDelta;
             var delta = GetSizeDelta(toMove);
-            if (Input.GetKey(key) && !_ended)
+            if (!ended)
             {
                 sizeDelta += new Vector2(Mathf.Abs(delta.x), Mathf.Abs(delta.y));
                 rt.sizeDelta = sizeDelta;
-            }
-            else
-            {
-                _ended = true;
             }
 
             rt.anchoredPosition += delta;
