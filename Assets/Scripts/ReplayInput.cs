@@ -15,11 +15,12 @@ namespace RainingKeys
 
             foreach (var key in Startup.Config.keys)
             {
-                container.AddKey(new KeyElement
+                var k = container.AddKey(new KeyElement
                 {
                     count = 0,
                     key = key.key
                 });
+                k.controlled = true;
             } 
         }
 
