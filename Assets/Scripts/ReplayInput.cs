@@ -1,9 +1,10 @@
-using System.Collections.Generic;
+using HarmonyLib;
+using RainingKeys.Bootstrap;
 using UnityEngine;
 
 namespace RainingKeys
 {
-    public static class ReplayInput
+    public static class ReplayInputImpl
     {
         public static void OnStartInputs()
         {
@@ -24,18 +25,20 @@ namespace RainingKeys
             } 
         }
 
-        public static void OnEndInputs()
+        public static bool OnEndInputs()
         {
             var container = Startup.Container;
 
-            if (!container) return;
+            if (!container) return false;
             
             container.Clear();
             
             foreach (var key in Startup.Config.keys)
             {
                 container.AddKey(key);
-            } 
+            }
+
+            return false;
         }
 
         public static void OnKeyPressed(KeyCode keyCode)

@@ -1,7 +1,9 @@
 {
     "name": "RainingKeys",
     "rootNamespace": "RainingKeys",
-    "references": [],
+    "references": [
+        "RainingKeys.Bootstrap"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

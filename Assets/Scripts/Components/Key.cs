@@ -148,6 +148,8 @@ namespace RainingKeys.Components
 
         private KeyHighlight _highlight;
 
+        private bool _pressed;
+
         public void Down()
         {
             highlightImage.color = activeLineColor;
@@ -186,13 +188,18 @@ namespace RainingKeys.Components
         {
             if (controlled) return;
 
-            if (Input.GetKeyDown(Code))
+            if (Input.GetKey(Code))
             {
-                countText.text = $"{++elem.count}";
-                Down();
+                if (!_pressed)
+                {
+                    _pressed = true;
+                    countText.text = $"{++elem.count}";
+                    Down();
+                }
             }
-            else if (Input.GetKeyUp(Code))
+            else if (_pressed)
             {
+                _pressed = false;
                 Up();
             }
         }
