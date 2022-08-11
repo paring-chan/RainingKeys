@@ -63,7 +63,7 @@ namespace RainingKeys
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
             CanvasScaler scaler = _obj.AddComponent<CanvasScaler>();
-            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
             scaler.referenceResolution = new Vector2(1920, 1080);
 
             canvas.sortingOrder = 1000;

@@ -2,7 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RainingKeys.Components {
+namespace RainingKeys.Components
+{
     public class KeyHighlight : MonoBehaviour
     {
         public Color color;
@@ -18,7 +19,7 @@ namespace RainingKeys.Components {
 
         private Vector2 _initialPosition;
         private Vector2 _initialSize;
-        
+
         private void Awake()
         {
             _initialPosition = rt.anchoredPosition;
@@ -43,6 +44,7 @@ namespace RainingKeys.Components {
                 case ViewerPosition.Top:
                     return new Vector2(0, -toMove);
             }
+
             return Vector2.zero;
         }
 
@@ -59,6 +61,7 @@ namespace RainingKeys.Components {
                 case ViewerPosition.Right:
                     return -rt.anchoredPosition.x - rt.sizeDelta.x > Values.RainTrackSize;
             }
+
             return false;
         }
 
@@ -74,13 +77,24 @@ namespace RainingKeys.Components {
                 keyComponent.HighlightPool.Enqueue(this);
                 return;
             }
-            
+
             var toMove = Time.unscaledDeltaTime * Values.RainSpeed;
             var sizeDelta = rt.sizeDelta;
             var delta = GetSizeDelta(toMove);
             if (!ended)
             {
-                sizeDelta += new Vector2(Mathf.Abs(delta.x), Mathf.Abs(delta.y));
+                var vec = new Vector2(0, 0);
+
+                if (delta.x != 0)
+                {
+                    vec.x += Mathf.Abs(delta.x);
+                }
+                else if (delta.y != 0)
+                {
+                    vec.y += Mathf.Abs(delta.y);
+                }
+
+                sizeDelta += vec;
                 rt.sizeDelta = sizeDelta;
             }
 
