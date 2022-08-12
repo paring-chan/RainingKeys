@@ -54,7 +54,7 @@ namespace RainingKeys.Components {
         {
             foreach (var (_, value) in Keys)
             {
-                Destroy(value);
+                Destroy(value.gameObject);
             }
 
             Keys.Clear();
