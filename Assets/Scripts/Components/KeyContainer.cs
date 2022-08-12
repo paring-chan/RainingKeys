@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace RainingKeys.Components {
     public class KeyContainer : MonoBehaviour {
@@ -15,6 +16,7 @@ namespace RainingKeys.Components {
         public Color rainColor;
         public Color inactiveCountTextColor;
         public Color activeCountTextColor;
+        public Font font;
 
         public Vector2 position;
 
@@ -76,6 +78,9 @@ namespace RainingKeys.Components {
             c.gameObject.SetActive(true);
             Keys.Add(key.key, c);
             c.position = viewerPosition;
+            
+            c.countText.font = font;
+            c.labelText.font = font;
 
             return c;
         }

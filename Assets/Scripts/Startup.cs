@@ -91,12 +91,11 @@ namespace RainingKeys
 
             font ??= defaultFont;
 
+            Container.font = font;
+
             foreach (var key in Config.keys)
             {
-                var k = Container.AddKey(key);
-
-                k.countText.font = font;
-                k.labelText.font = font;
+                Container.AddKey(key);
             }
         }
 
