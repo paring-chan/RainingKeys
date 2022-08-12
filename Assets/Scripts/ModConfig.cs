@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace RainingKeys
@@ -21,6 +22,7 @@ namespace RainingKeys
         public SerializableColor inactiveLineColor = new(Color.white);
         public SerializableColor activeLineColor = new(47, 66, 255);
         public SerializableColor rainColor = new(47, 66, 255);
+        public float spacing = 0f;
         
         public bool enableCustomFonts = true;
 

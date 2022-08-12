@@ -74,6 +74,8 @@ MonoBehaviour:
   rainColor: {r: 0, g: 0, b: 0, a: 0}
   inactiveCountTextColor: {r: 0, g: 0, b: 0, a: 0}
   activeCountTextColor: {r: 0, g: 0, b: 0, a: 0}
+  font: {fileID: 0}
+  layoutGroup: {fileID: 8797520161089547750}
   position: {x: 0, y: 0}
   size: 0
   viewerPosition: 0

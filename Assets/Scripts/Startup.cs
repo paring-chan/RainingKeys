@@ -70,6 +70,8 @@ namespace RainingKeys
 
             Container = Object.Instantiate(ContainerTemplate, _obj.transform);
 
+            Container.Spacing = Config.spacing;
+
             Container.inactiveTextColor = Config.inactiveTextColor.Color;
             Container.activeTextColor = Config.activeTextColor.Color;
             Container.inactiveLineColor = Config.inactiveLineColor.Color;
@@ -109,7 +111,10 @@ namespace RainingKeys
         private static void Load(UnityModManager.ModEntry entry)
         {
             Config = File.Exists(SettingPath)
-                ? JsonConvert.DeserializeObject<ModConfig>(File.ReadAllText(SettingPath))
+                ? JsonConvert.DeserializeObject<ModConfig>(File.ReadAllText(SettingPath), new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                })
                 : new();
 
             defaultFont = RDString.GetFontDataForLanguage(RDString.language).font;
@@ -237,7 +242,15 @@ namespace RainingKeys
                 GUILayout.EndVertical();
 
                 GUILayout.EndHorizontal();
+                
+                GUILayout.Label("Spacing");
+                var newSpacing = GUILayout.TextField(Config.spacing.ToString(CultureInfo.InvariantCulture));
 
+                if (float.TryParse(newSpacing, out var spacing))
+                {
+                    Config.spacing = spacing;
+                }
+                
                 if (float.TryParse(newRainSpeed, out var speed))
                 {
                     Config.rainSpeed = speed;

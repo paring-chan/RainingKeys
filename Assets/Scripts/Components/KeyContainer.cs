@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UI;
 
 namespace RainingKeys.Components {
     public class KeyContainer : MonoBehaviour {
@@ -17,6 +18,13 @@ namespace RainingKeys.Components {
         public Color inactiveCountTextColor;
         public Color activeCountTextColor;
         public Font font;
+
+        public HorizontalOrVerticalLayoutGroup layoutGroup;
+
+        public float Spacing
+        {
+            set => layoutGroup.spacing = value;
+        }
 
         public Vector2 position;
 
