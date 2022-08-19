@@ -449,7 +449,7 @@ namespace RainingKeys
                 {
                     if (_canvas != null)
                     {
-                        Object.Destroy(_canvas);
+                        Object.Destroy(_canvas.gameObject);
                         _canvas = null;
                         Container = null;
                     }
