@@ -17,7 +17,7 @@ MonoBehaviour:
   buildTarget: 5
   recurseDirectories: 0
   simulate: 0
-  BundleArtifactPath: <AssetBundleStaging>
+  BundleArtifactPath: <StagingRoot>
 --- !u!114 &-4880803394871459637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,9 +51,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   stageDebugDatabases: 0
+  releaseBuild: 1
   assemblyArtifactPath: <AssemblyStaging>
   buildTarget: 5
-  buildTargetGroup: 1
 --- !u!114 &-1026501853061874706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,10 +80,10 @@ MonoBehaviour:
   m_Name: Stage
   m_EditorClassIdentifier: 
   Data:
-  - {fileID: -1076599081388022069}
   - {fileID: -1026501853061874706}
+  - {fileID: -1076599081388022069}
   - {fileID: -7508682430669237749}
-  QuickAccess: 0
+  QuickAccess: 1
   manifest: {fileID: 11400000, guid: e23404747c3538b44a101f74f7327c85, type: 2}
 --- !u!114 &646062893124964707
 MonoBehaviour:
@@ -99,6 +99,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   stageDebugDatabases: 0
+  releaseBuild: 1
   assemblyArtifactPath: <AssemblyStaging>
   buildTarget: 5
-  buildTargetGroup: 1

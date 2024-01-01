@@ -15,7 +15,7 @@ MonoBehaviour:
   Data:
   - {fileID: 9079977759950989269}
   - {fileID: 1481113962358918836}
-  QuickAccess: 0
+  QuickAccess: 1
   manifest: {fileID: 11400000, guid: e23404747c3538b44a101f74f7327c85, type: 2}
 --- !u!114 &1481113962358918836
 MonoBehaviour:
@@ -33,6 +33,7 @@ MonoBehaviour:
   PerManifest: 0
   ListType: 0
   Manifests: []
+  ReplaceDirectory: 1
   Recursive: 1
   SourceRequired: 1
   EstablishDestination: 1

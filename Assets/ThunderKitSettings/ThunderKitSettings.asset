@@ -20,10 +20,18 @@ MonoBehaviour:
   DateTimeFormat: HH:mm:ss:fff
   CreatedDateFormat: MMM/dd HH:mm:ss
   ShowLogWindow: 1
-  MarkdownOpenMode: 0
-  SelectedPipeline: {fileID: 0}
+  LogPackageSourceTimings: 0
+  GenerateAssetsProject: 0
+  FixLocalDiskPackages: 0
+  ImageCachePath: Library/MarkdownImageCache
+  CachedImageCount: 0
+  CacheSize: 0
+  MarkdownOpenMode: 1
+  SelectedPipeline: {fileID: 11400000, guid: 5e13516f216d2584a8a37bb1c3624225, type: 2}
   SelectedManifest: {fileID: 0}
-  QuickAccessPipelines: []
+  QuickAccessPipelines:
+  - {fileID: 11400000, guid: 5e13516f216d2584a8a37bb1c3624225, type: 2}
+  - {fileID: 11400000, guid: 2a92dea0db148b64499b3011b53178e8, type: 2}
   QuickAccessManifests:
   - {fileID: 11400000, guid: e23404747c3538b44a101f74f7327c85, type: 2}
-  ImportConfiguration: {fileID: 11400000, guid: e79fdeaf9e36c7e47b0cfe30fbf078e5, type: 2}
+  ImportConfiguration: {fileID: 11400000, guid: e6dbfe9545138a942940be98eedeed50, type: 2}

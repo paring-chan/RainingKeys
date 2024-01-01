@@ -151,7 +151,7 @@ namespace RainingKeys
                 }
             };
 
-            var bundle = AssetBundle.LoadFromFile(Path.Combine(entry.Path, "assets.bundle"));
+            var bundle = AssetBundle.LoadFromFile(Path.Combine(entry.Path, "rainingkeys.bundle"));
 
             Positions[ViewerPosition.Top] = bundle
                 .LoadAsset<GameObject>("Assets/Prefab/Container_Top.prefab").GetComponent<KeyContainer>();

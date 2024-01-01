@@ -31,9 +31,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StagingPaths:
   - <StagingRoot>
+  includeMetaFiles: 0
   files:
   - {fileID: 4900000, guid: 5be36a747ce7468bbb6efd9d253ef4be, type: 3}
-  - {fileID: -1121539586, guid: cc6da9201f32e814ca6b02e8aa9e3c5b, type: 3}
+  - {fileID: 102900000, guid: cc6da9201f32e814ca6b02e8aa9e3c5b, type: 3}
 --- !u!114 &-90173350892007476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,8 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StagingPaths: []
   Author: pikokr
-  Name: KeyViewer
-  Description: 
+  Name: RainingKeys
+  Description: reverse raining(?) key viewer for ADOFAI
   Version: 0.0.1
   Dependencies: []
 --- !u!114 &11400000
@@ -84,9 +85,9 @@ MonoBehaviour:
   m_Name: AssetBundleDefinitions
   m_EditorClassIdentifier: 
   StagingPaths:
-  - <StagingRoot>
+  - <AssetBundleStaging>
   assetBundles:
-  - assetBundleName: assets.bundle
+  - assetBundleName: rainingkeys.bundle
     assets:
     - {fileID: 3586643959215362085, guid: a09492a2cb1bcd9409532b1e050df195, type: 3}
     - {fileID: 3586643959215362085, guid: bb664016a9bd3ac438cead537f1f6289, type: 3}

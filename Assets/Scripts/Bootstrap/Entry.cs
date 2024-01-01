@@ -16,7 +16,7 @@ namespace RainingKeys.Bootstrap
 
         private static void Load(UnityModManager.ModEntry entry)
         {
-            LoadAssembly(Path.Combine(entry.Path, "NewtonSoft.Json.dll"));
+            LoadAssembly(Path.Combine(entry.Path, "Newtonsoft.Json.dll"));
             var asm = LoadAssembly(Path.Combine(entry.Path, "RainingKeys.dll"));
 
             var impl = asm.GetType("RainingKeys.ReplayInputImpl");
