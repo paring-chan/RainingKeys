@@ -13,8 +13,7 @@
         "Assembly-CSharp.dll",
         "UnityModManager.dll",
         "RDTools.dll",
-        "Newtonsoft.Json.dll",
-        "AdofaiTweaks.dll"
+        "Newtonsoft.Json.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
